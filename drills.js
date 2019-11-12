@@ -115,6 +115,7 @@ const nonBST = {
   right:{ key: 2, value: 0, left: null, right: null }, 
 };
 // console.log(isItBST(BST));
+
 function printKeys(BST) {
   let arr = [];
   while(BST.key !== null){
@@ -123,10 +124,88 @@ function printKeys(BST) {
   }
   return arr;
 }
-console.log(printKeys(BST));
+// console.log(printKeys(BST));
 
-// function 3rdHighest(bst){
-//   //grab all keys from bst and add them to an array
-//   //sort array 
-//   // find third highest number in array
-// }
+
+function getNthLargest (bst, state) {
+  //Walk down to the furthest right node.
+  if (bst.right) {
+    getNthLargest(bst.right, state)
+    if (state.result) {
+      return;
+    }
+  }
+  //decrement every time we check a node
+  state.nth--;
+  //if value goes to zero we've hit our limit
+  if (!state.nth) {
+    state.result = bst.key;
+    return;
+  }
+  //start walking with the left 
+  if (bst.left) {
+    getNthLargest(bst.left, state)
+  }
+}
+
+function findThirdLargest (bst) {
+  if (bst.key === null) {
+    return null;
+  }
+  const state = {
+    nth: 3,
+    result: null
+  }
+  getNthLargest(bst, state);
+  return state.result;
+}
+
+// console.log(findThirdLargest(BST))
+
+// 8. Balanced BST
+
+const balancedBST = { 
+  key: 3, value: 0, 
+  left: { key: 2, value: 0, left: null, right: null }, 
+  right:{ key: 4, value: 0, left: null, right: null }, 
+};
+
+function isBalanced(bst){
+  if(!bst){
+    return 0;
+  }
+  let leftHeight = 1 + height(bst.left);
+  let rightHeight = 1 + height(bst.right);
+  let heightDifference = leftHeight - rightHeight;
+  
+  if (Math.abs(heightDifference) > 1) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+// console.log(isBalanced(balancedBST)) // true
+// console.log(isBalanced(BST)) // false
+
+// 9. Are they the same BSTs?
+const input1 = [3, 5, 4, 6, 1, 0, 2];
+const input2 = [3, 1, 5, 2, 4, 6, 0];
+const input3 = [3, 1, 5, 2, 4, 6, 9];
+
+function sameBSTs(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  let sortedArr1 = arr1.sort();
+  let sortedArr2 = arr2.sort();
+  for(let i=0; i<arr1.length; i++) {
+    if (sortedArr1[i] !== sortedArr2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+console.log(sameBSTs(input1, input2)); // true
+console.log(sameBSTs(input1, input3)); // false
