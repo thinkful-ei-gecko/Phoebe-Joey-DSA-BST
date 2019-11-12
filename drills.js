@@ -88,7 +88,7 @@ function isItBST(bst) {
   }
   else {
     if(bst.left) {
-      if (bst.left > bst.key) {
+      if (bst.left.key > bst.key) {
         return false;
       } else {
         isItBST(bst.left);
@@ -98,7 +98,7 @@ function isItBST(bst) {
     // (bst.left && bst.left > bst.key) ? false : isItBST(this.bst);
 
     if(bst.right) {
-      if (bst.right < bst.key) {
+      if (bst.right.key < bst.key) {
         return false;
       } else {
         isItBST(bst.right);
@@ -114,4 +114,19 @@ const nonBST = {
   left: { key: 4, value: 0, left: null, right: null }, 
   right:{ key: 2, value: 0, left: null, right: null }, 
 };
-console.log(isItBST(nonBST));
+// console.log(isItBST(BST));
+function printKeys(BST) {
+  let arr = [];
+  while(BST.key !== null){
+    arr.push(BST.key);
+    
+  }
+  return arr;
+}
+console.log(printKeys(BST));
+
+// function 3rdHighest(bst){
+//   //grab all keys from bst and add them to an array
+//   //sort array 
+//   // find third highest number in array
+// }
