@@ -1,4 +1,4 @@
-const BinarySearchTree = require("./BST");
+const BinarySearchTree = require('./BST');
 
 function printPretty(BST) {
   if (BST.value === null) {
@@ -28,15 +28,15 @@ function printPretty(BST) {
 // See BST.js.
 // Results for both match what our BST is returning
 
-// const BST = new BinarySearchTree(3, 3)
+const BST = new BinarySearchTree(3, 3);
 
-// BST.insert(1, 1)
-// BST.insert(4, 4)
-// BST.insert(6, 6)
-// BST.insert(9, 9)
-// BST.insert(2, 2)
-// BST.insert(5, 5)
-// BST.insert(7, 7)
+BST.insert(1, 1);
+BST.insert(4, 4);
+BST.insert(6, 6);
+BST.insert(9, 9);
+BST.insert(2, 2);
+BST.insert(5, 5);
+BST.insert(7, 7);
 
 // console.log(JSON.stringify(BST))
 // console.log(BST.right.right)
@@ -62,5 +62,56 @@ function printPretty(BST) {
 // If we ran the tree(BST) for input [3,1,4,6,9,2,5,7], we'd get 37
 
 // 5. Height of a BST
+function height(bst){
+  
+  if(!bst){
+    return 0;
+  }
+  let leftHeight = 1 + height(bst.left);
+  let rightHeight = 1 + height(bst.right);
 
-console.log(JSON.stringify(printPretty(BST)));
+  if(leftHeight > rightHeight){
+    return leftHeight;
+  }else{ 
+    return rightHeight;
+  }
+  // (leftHeight > rightHeight) ? leftHeight : rightHeight;
+  // return Math.max(leftHeight, rightHeight);
+}
+
+// console.log(JSON.stringify(printPretty(BST)));
+// console.log(height(BST));
+function isItBST(bst) {
+  
+  if (!bst) {
+    return true;
+  }
+  else {
+    if(bst.left) {
+      if (bst.left > bst.key) {
+        return false;
+      } else {
+        isItBST(bst.left);
+      }
+    }
+    // Alt code:
+    // (bst.left && bst.left > bst.key) ? false : isItBST(this.bst);
+
+    if(bst.right) {
+      if (bst.right < bst.key) {
+        return false;
+      } else {
+        isItBST(bst.right);
+      }
+    }
+    // Alt code:
+    // (bst.left && bst.left > bst.key) ? false : isItBST(this.bst);
+    return true;
+  }
+}
+const nonBST = { 
+  key: 3, value: 0, 
+  left: { key: 4, value: 0, left: null, right: null }, 
+  right:{ key: 2, value: 0, left: null, right: null }, 
+};
+console.log(isItBST(nonBST));
