@@ -1,4 +1,16 @@
-const BinarySearchTree = require('./BST');
+const BinarySearchTree = require("./BST");
+
+function printPretty(BST) {
+  if (BST.value === null) {
+    return;
+  } else {
+    return {
+      node: BST.value,
+      left: BST.left ? printPretty(BST.left) : null,
+      right: BST.right ? printPretty(BST.right) : null
+    };
+  }
+}
 
 // 1. Draw a BST
 // 3,1,4,6,9,2,5,7
@@ -13,7 +25,7 @@ const BinarySearchTree = require('./BST');
 // https://share.getcloudapp.com/d5ubjRoO
 
 // 3. Create a BST class
-// See BST.js. 
+// See BST.js.
 // Results for both match what our BST is returning
 
 // const BST = new BinarySearchTree(3, 3)
@@ -26,7 +38,7 @@ const BinarySearchTree = require('./BST');
 // BST.insert(5, 5)
 // BST.insert(7, 7)
 
-// console.log(BST)
+// console.log(JSON.stringify(BST))
 // console.log(BST.right.right)
 
 // const BST = new BinarySearchTree('E', 3)
@@ -46,7 +58,9 @@ const BinarySearchTree = require('./BST');
 // console.log(BST)
 // console.log(BST.right.left)
 
-// 4. What does this program do? 
-// If we ran the tree(BST) for input [3,1,4,6,9,2,5,7], we'd get 37 
+// 4. What does this program do?
+// If we ran the tree(BST) for input [3,1,4,6,9,2,5,7], we'd get 37
 
-// 5. Height of a BST 
+// 5. Height of a BST
+
+console.log(JSON.stringify(printPretty(BST)));

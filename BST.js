@@ -37,7 +37,7 @@ class BinarySearchTree {
       throw new Error("Key error");
     }
   }
-  
+
   remove(key) {
     if (this.key === key) {
       if (this.left && this.right) {
