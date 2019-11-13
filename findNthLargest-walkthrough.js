@@ -1,3 +1,9 @@
+/**
+ * @function getNthLargest
+ * @description when you exit the function when the return is called, you skip the code at the end AND goes back up the tree as it returns
+ * @param {BST} bst 
+ * @param {obj} state 
+ */
 function getNthLargest (bst, state) {
   //Walking down to the furthest right node.
   if (bst.right) {
